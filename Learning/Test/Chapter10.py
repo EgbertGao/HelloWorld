@@ -42,3 +42,7 @@ with open(filename, 'w') as file_object:
     file_object.write("This guest's name is {}.".format(name))
 '''
 
+import sys
+import pygame
+
+print(type(pygame.QUIT()))

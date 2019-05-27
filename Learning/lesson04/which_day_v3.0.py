@@ -4,6 +4,7 @@
     日期：2019-5-17
     功能：输入某年某月某日，判断这一天是这一年的第几天？
     2.0增加：用列表替换元组
+    3.0增加：将每月划分成不同的集合
 '''
 from datetime import datetime
 
@@ -29,11 +30,24 @@ def main():
     month = input_date.month
     day = input_date.day
 
+    #包含30天 月份集合
+    _30_days_month_set = {4, 6, 9, 11}
+    _31_days_month_set = {1, 3, 5, 7, 8, 10, 12}
+
+    days = day #初始化值
+    #days += day
+
+    for i in range(1, month):
+        if i in _30_days_month_set:
+            days += 30
+        elif i in _31_days_month_set:
+            days += 31
+        else:
+            days += 28
     # 计算之前月份天数综合以及当前月份天数
-    days_in_month_list = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    if is_leap_year(year):
-        days_in_month_list[1] = 29
-    days = sum(days_in_month_list[: month - 1]) + day
+
+    if is_leap_year(year) and month > 2:
+        days += 1
 
     print('这是{}年的第{}天。'.format(year, days))
 
